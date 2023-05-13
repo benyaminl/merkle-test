@@ -6,6 +6,7 @@ export class Env {
     declare DB_PASSWORD: string;
     declare DB_HOST: string;
     declare DB_PORT: number;
+    declare APP_SECRET: string;
 
     public static get(): Env 
     {

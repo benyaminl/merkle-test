@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="login">
+        Username : <input type="user"> <br>
+        Password : <input type="password"> <br>
+        <button type="submit">Login</button>
+    </form>
+
+    <div id="data" style="display: hidden;">
+        <h4>Data Guest</h4>
+        <div id="guest">
+
+        </div>
+    </div>
+    <script>
+    document.querySelector("#login").onsubmit = function(e) 
+    {
+        e.preventDefault();
+        let form = e.target;
+        let req = new Request("/api/admin/auth");
+
+        loadData();
+    }
+
+    function loadData()
+    {
+        let req = new Request("/api/admin/guest");
+        fetch(req)
+        .then(d => d.json())
+        .then(d => {
+            let html = ``;
+            for (let i = 0; i < d.data.data.length; i++) {
+                const el = d.data.data[i];
+                console.log(el);
+                html += `
+                    Tanggal : `+el.createdAt+` <br>
+                    Nama : <b>`+el.name+`</b><br>
+                    Phone : <b>`+el.phone+`</b><br>
+                    Address : <b>`+el.address+`</b><br>
+                    Note : <b>`+el.note+`</b><br>
+                    <button onclick="deleteData(`+el.id+`)">Delete</button>
+                `;
+            }
+            document.querySelector("#guest").innerHTML = html;
+        }); 
+    }
+
+    function deleteData(id)
+    {
+        let req = new Request("/api/admin/guest/" + id, {
+            method: "delete"
+        });
+
+        fetch(req)
+        .then(d => d.json())
+        .then(d => {
+            alert(d.message);
+        });
+    }
+    </script>
+</body>
+</html>

@@ -21,6 +21,9 @@ Guestbook.init({
     address: {
         type: DataTypes.STRING,
     },
+    phone: {
+        type: DataTypes.STRING,
+    },
     note: {
         type: DataTypes.STRING,
     }

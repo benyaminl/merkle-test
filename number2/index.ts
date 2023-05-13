@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from 'express'
 import bodyParser from 'body-parser';
 import multer from 'multer';
 import { guestbook } from './routes/guestbook';
+import { admin } from "./routes/admin";
 
 const multerConfig = {
     //specify diskStorage (another option is memory)
@@ -63,6 +64,11 @@ app.get("/gallery", function (req: Request, res: Response) {
     res.render("gallery");
 });
 
+app.get("/admin", function (req: Request, res: Response) {
+    res.render("admin");
+});
+
 app.use("/api/guestbook", guestbook);
+app.use("/api/admin", admin);
 
 app.listen(3000);
