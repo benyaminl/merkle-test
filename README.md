@@ -26,6 +26,14 @@ NOTE: This is using ts to node, so it need external module. So that's why we nee
 
 ## Number 2
 
+### Database Structure 
+To do the migration, there are a file in `number2/models/migration.ts`, please run this before, so it will add the table to the db by `ts-node number2/models/migration.ts`. If this process isn't done first, the sql will throw exception, and the app will exit by itself (it's a ts/javascript, we need container to handle this :/)
+
+## Database Connection
+Please copy paste `number2/env.example` to `number2/.env`, and change the config to appropriate value on your local database auth credential. 
+
+### How to run ?
+
 The code is in folder `number2/index.ts`. To run please use `ts-node` and do `npm install first`
 ```
 # if globbaly
@@ -52,6 +60,10 @@ then run using `ts-node number2/index.ts`. Example :
 ```
 
 NOTE: The jwt isn't done yet, I'm sorry, also the authentication isn't implemented yet. It should just display the data without login.
+
+### Code Time Tracking
+
+This is the wakatime of the code track https://wakatime.com/@benlimanto/projects/rbfyvgbmgt?start=2023-05-07&end=2023-05-13, You can go to that page, and see the code that I edit, and how much time I need to do that. I hope this provide insight to the code checker. 
 
 ### How to show page?
 
