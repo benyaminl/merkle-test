@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guestbook</title>
+</head>
+<body>
+    <h3>Welcome to Guestbook</h3>
+    <h6>Fill The Guestbook Form To Say Hello</h6>
+    <form id="guestForm">
+        Name    : <input type="text" name="name" > <br>
+        Address : <input type="text" name="addr" > <br>
+        Phone   : <input type="tel" name="phone" > <br>
+        Note    : <br> 
+        <textarea name="note" cols="30" rows="10"></textarea>
+        <button type="submit">Submit</button>
+    </form>
+    <br><br>
+    Do you want to see the guestbook gallery? <a href="gallery">Go here</a> <br><br>
+    Are you admin? Go to <a href="admin">here</a> <br><br>
+    <script>
+        /**
+         * @param e {FormDataEvent}
+         **/
+        document.querySelector("#guestForm").onsubmit = (e) => {
+            e.preventDefault();
+            console.log(e.target.name);
+            let form = e.target;
+            let headers = new Headers();
+            headers.append("Content-Type", "application/json");
+            let req = new Request("/api/guestbook", {
+                method: "post",
+                headers: headers,
+                body: JSON.stringify({
+                    name: form.name.value,
+                    addr: form.addr.value,
+                    note: form.note.value,
+                    phone: form.phone.value
+                })
+            });            
+            
+            fetch(req).then(d => d.json()).then(d => {
+                alert(d.message);
+            });
+        }
+    </script>
+</body>
+</html>
