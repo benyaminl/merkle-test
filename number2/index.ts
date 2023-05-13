@@ -55,8 +55,12 @@ app.get('/', function (req: Request, res: Response) {
     res.render("index");
 });
 
-app.post("/", function (req: Request, res: Response) {
-    res.send(req.body);
+app.get('/', function (req: Request, res: Response) {
+    res.render("index");
+});
+
+app.get("/gallery", function (req: Request, res: Response) {
+    res.render("gallery");
 });
 
 app.use("/api/guestbook", guestbook);
